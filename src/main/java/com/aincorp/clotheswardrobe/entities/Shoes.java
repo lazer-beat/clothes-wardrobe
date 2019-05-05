@@ -14,7 +14,6 @@ public class Shoes {
     @Column(name = "shoe_name")
     private String name;
 
-
     public Shoes() {
 
     }

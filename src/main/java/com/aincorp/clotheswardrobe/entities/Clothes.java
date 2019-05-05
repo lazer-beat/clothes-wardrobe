@@ -51,9 +51,6 @@ public class Clothes {
     @Column(name = "created_date")
     private Date createdDate;
 
-    @OneToOne(mappedBy = "clothes", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
-    private User user;
-
     public Clothes() {
     }
 
@@ -129,13 +126,5 @@ public class Clothes {
 
     public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 }

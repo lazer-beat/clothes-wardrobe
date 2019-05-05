@@ -19,15 +19,11 @@ public class Role {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "roles")
-    private Set<User> users;
-
     public Role() {
     }
 
-    public Role(@NotBlank(message = "Введите имя роли") @Size(min = 1, max = 32, message = "Введено не корректное имя роли, введите больше одного символа") String name, Set<User> users) {
+    public Role(@NotBlank(message = "Введите имя роли") @Size(min = 1, max = 32, message = "Введено не корректное имя роли, введите больше одного символа") String name) {
         this.name = name;
-        this.users = users;
     }
 
     public Long getId() {
@@ -44,13 +40,5 @@ public class Role {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Set<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Set<User> users) {
-        this.users = users;
     }
 }

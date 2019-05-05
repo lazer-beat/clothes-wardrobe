@@ -27,28 +27,30 @@ public class User {
     @Transient
     private String confirmPassword;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "person_id")
+    @OneToOne
+    @JoinTable(name = "user_person",
+            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "person_id", referencedColumnName = "id", unique = true)})
     private Person person;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "clothes_id")
-    private Clothes clothes;
-
     @OneToMany
-    @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @JoinTable(name = "user_clothes", joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "clothes_id", referencedColumnName = "id")})
+    private Set<Clothes> clothes;
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "user_roles", joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")})
     private Set<Role> roles;
 
     public User() {
     }
 
-    public User(@NotBlank(message = "Введите ваш логин") @Size(min = 2, max = 32, message = "Введен не корректный логин, введите больше двух символов") String username, @NotBlank(message = "Введите ваш пароль") @Size(min = 8, max = 32, message = "Введен не корректный логин, введите больше восьми символов") String password, String confirmPassword, Person person, Clothes clothes) {
+    public User(@NotBlank(message = "Введите ваш логин") @Size(min = 2, max = 32, message = "Введен не корректный логин, введите больше двух символов") String username, @NotBlank(message = "Введите ваш пароль") @Size(min = 8, max = 32, message = "Введен не корректный логин, введите больше восьми символов") String password, String confirmPassword, Person person) {
         this.username = username;
         this.password = password;
         this.confirmPassword = confirmPassword;
         this.person = person;
-        this.clothes = clothes;
     }
 
     public Long getId() {
@@ -91,11 +93,11 @@ public class User {
         this.person = person;
     }
 
-    public Clothes getClothes() {
+    public Set<Clothes> getClothes() {
         return clothes;
     }
 
-    public void setClothes(Clothes clothes) {
+    public void setClothes(Set<Clothes> clothes) {
         this.clothes = clothes;
     }
 

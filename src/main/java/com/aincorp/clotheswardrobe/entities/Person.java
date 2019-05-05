@@ -40,19 +40,15 @@ public class Person {
     @Column(name = "email")
     private String email;
 
-    @OneToOne(mappedBy = "person", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
-    private User user;
-
     public Person() {
     }
 
-    public Person(@NotBlank(message = "Введите ваше имя") @Size(min = 1, message = "Введено не корректное имя, введите больше одного символа") String firstName, @NotBlank(message = "Введите вашу фамилию") @Size(min = 1, message = "Введена не корректная фамилия, введите больше одного символа") String secondName, @NotBlank(message = "Введите ваше отчество") @Size(min = 1, message = "Введено не корректное отчество, введите больше одного символа") String lastName, @NotBlank(message = "Пожалуйста введите ваш номер телефона") @Pattern(regexp = "[\\d]{10}") String phoneNumber, @NotBlank(message = "Пожалуйста введите ваш емейл адрес") @Email(message = "Введите корректный емейл адрес") String email, User user) {
+    public Person(@NotBlank(message = "Введите ваше имя") @Size(min = 1, message = "Введено не корректное имя, введите больше одного символа") String firstName, @NotBlank(message = "Введите вашу фамилию") @Size(min = 1, message = "Введена не корректная фамилия, введите больше одного символа") String secondName, @NotBlank(message = "Введите ваше отчество") @Size(min = 1, message = "Введено не корректное отчество, введите больше одного символа") String lastName, @NotBlank(message = "Пожалуйста введите ваш номер телефона") @Pattern(regexp = "[\\d]{10}") String phoneNumber, @NotBlank(message = "Пожалуйста введите ваш емейл адрес") @Email(message = "Введите корректный емейл адрес") String email) {
         this.firstName = firstName;
         this.secondName = secondName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.email = email;
-        this.user = user;
     }
 
     public Long getId() {
@@ -101,13 +97,5 @@ public class Person {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 }
