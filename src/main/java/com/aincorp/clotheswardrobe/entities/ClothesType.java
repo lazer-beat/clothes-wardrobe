@@ -21,7 +21,8 @@ public class ClothesType {
     @Column(name = "deleted")
     private Boolean deleted;
 
-    @OneToOne(mappedBy = "clothesType")
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "clothes_id")
     private Clothes clothes;
 
     public ClothesType() {

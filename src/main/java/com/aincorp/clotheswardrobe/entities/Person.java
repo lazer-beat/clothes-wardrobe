@@ -16,29 +16,31 @@ public class Person {
     private Long id;
 
     @NotBlank(message = "Введите ваше имя")
-    @Size(min=1, message = "Введено не корректное имя, введите больше одного символа")
-    @Column(name = "firstName")
+    @Size(min = 1, message = "Введено не корректное имя, введите больше одного символа")
+    @Column(name = "first_name")
     private String firstName;
 
     @NotBlank(message = "Введите вашу фамилию")
-    @Size(min=1, message = "Введена не корректная фамилия, введите больше одного символа")
-    @Column(name = "secondName")
+    @Size(min = 1, message = "Введена не корректная фамилия, введите больше одного символа")
+    @Column(name = "second_name")
     private String secondName;
 
     @NotBlank(message = "Введите ваше отчество")
-    @Size(min=1, message = "Введено не корректное отчество, введите больше одного символа")
-    @Column(name = "lastName")
+    @Size(min = 1, message = "Введено не корректное отчество, введите больше одного символа")
+    @Column(name = "last_name")
     private String lastName;
 
     @NotBlank(message = "Пожалуйста введите ваш номер телефона")
     @Pattern(regexp = "[\\d]{10}")
+    @Column(name = "phone_number")
     private String phoneNumber;
 
     @NotBlank(message = "Пожалуйста введите ваш емейл адрес")
     @Email(message = "Введите корректный емейл адрес")
+    @Column(name = "email")
     private String email;
 
-    @OneToOne(mappedBy = "person")
+    @OneToOne(mappedBy = "person", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
     private User user;
 
     public Person() {

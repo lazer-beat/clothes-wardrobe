@@ -1,12 +1,15 @@
 package com.aincorp.clotheswardrobe.entities.emunerations;
 
 
-public enum  ClothesSize {
+/*
+Перечисление размеров одежды
+ */
+public enum ClothesSize {
 
     S("small"),
     M("middle"),
     L("large"),
-    xS("extra small"),
+    XS("extra small"),
     XL("extra large"),
     UNKNOWN("");
 

@@ -51,13 +51,8 @@ public class Clothes {
     @Column(name = "created_date")
     private Date createdDate;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "user_clothes",
-            joinColumns = @JoinColumn(name="user_id"),
-            inverseJoinColumns = @JoinColumn(name="clothes_id")
-    )
+    @OneToOne(mappedBy = "clothes", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
     private User user;
-
 
     public Clothes() {
     }

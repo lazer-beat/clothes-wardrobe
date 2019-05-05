@@ -10,30 +10,32 @@ import java.util.Set;
 public class User {
 
     @Id
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @NotBlank(message = "Введите ваш логин")
-    @Size(min=2, max = 32 ,message = "Введен не корректный логин, введите больше двух символов")
+    @Size(min = 2, max = 32, message = "Введен не корректный логин, введите больше двух символов")
     @Column(name = "username")
     private String username;
 
     @NotBlank(message = "Введите ваш пароль")
-    @Size(min=8, max = 32 ,message = "Введен не корректный логин, введите больше восьми символов")
+    @Size(min = 8, max = 32, message = "Введен не корректный логин, введите больше восьми символов")
     @Column(name = "password")
     private String password;
 
     @Transient
     private String confirmPassword;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinTable(name = "user_person",
-            joinColumns = @JoinColumn(name="user_id"),
-            inverseJoinColumns = @JoinColumn(name="person_id")
-    )
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "person_id")
     private Person person;
 
-    @ManyToMany
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "clothes_id")
+    private Clothes clothes;
+
+    @OneToMany
     @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
@@ -41,12 +43,12 @@ public class User {
     public User() {
     }
 
-    public User(@NotBlank(message = "Введите ваш логин") @Size(min = 2, max = 32, message = "Введен не корректный логин, введите больше двух символов") String username, @NotBlank(message = "Введите ваш пароль") @Size(min = 8, max = 32, message = "Введен не корректный логин, введите больше восьми символов") String password, String confirmPassword, Person person, Set<Role> roles) {
+    public User(@NotBlank(message = "Введите ваш логин") @Size(min = 2, max = 32, message = "Введен не корректный логин, введите больше двух символов") String username, @NotBlank(message = "Введите ваш пароль") @Size(min = 8, max = 32, message = "Введен не корректный логин, введите больше восьми символов") String password, String confirmPassword, Person person, Clothes clothes) {
         this.username = username;
         this.password = password;
         this.confirmPassword = confirmPassword;
         this.person = person;
-        this.roles = roles;
+        this.clothes = clothes;
     }
 
     public Long getId() {
@@ -87,6 +89,14 @@ public class User {
 
     public void setPerson(Person person) {
         this.person = person;
+    }
+
+    public Clothes getClothes() {
+        return clothes;
+    }
+
+    public void setClothes(Clothes clothes) {
+        this.clothes = clothes;
     }
 
     public Set<Role> getRoles() {

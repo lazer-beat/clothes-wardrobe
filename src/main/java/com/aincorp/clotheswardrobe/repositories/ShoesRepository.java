@@ -1,9 +1,9 @@
 package com.aincorp.clotheswardrobe.repositories;
 
-import com.aincorp.clotheswardrobe.entities.Clothes;
+import com.aincorp.clotheswardrobe.entities.Shoes;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ClothesRepository extends JpaRepository<Clothes, Long> {
+public interface ShoesRepository extends JpaRepository<Shoes, Long> {
 }

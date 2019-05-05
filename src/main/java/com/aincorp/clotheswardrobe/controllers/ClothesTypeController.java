@@ -1,7 +1,6 @@
 package com.aincorp.clotheswardrobe.controllers;
 
 import com.aincorp.clotheswardrobe.entities.ClothesType;
-import com.aincorp.clotheswardrobe.repositories.ClothesTypeRepository;
 import com.aincorp.clotheswardrobe.service.ClothesTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -20,8 +19,8 @@ public class ClothesTypeController {
 
     Map<String, String> errors;
 
-    @GetMapping(value = "/allClothesType")
-    public List<ClothesType> getAllClothes () {
+    @GetMapping(value = "/allClothesTypes")
+    public List<ClothesType> getAllClothesTypes() {
         return clothesTypeService.getAllClothesType();
     }
 }

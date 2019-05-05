@@ -10,15 +10,16 @@ import java.util.Set;
 public class Role {
 
     @Id
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @NotBlank(message = "Введите имя роли")
-    @Size(min=1, max = 32 ,message = "Введено не корректное имя роли, введите больше одного символа")
+    @Size(min = 1, max = 32, message = "Введено не корректное имя роли, введите больше одного символа")
     @Column(name = "name")
     private String name;
 
-    @ManyToMany(mappedBy = "roles")
+    @OneToMany(mappedBy = "roles")
     private Set<User> users;
 
     public Role() {
