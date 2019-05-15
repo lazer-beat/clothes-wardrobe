@@ -1,4 +1,4 @@
-package com.aincorp.clotheswardrobe.service;
+package com.aincorp.clotheswardrobe.services;
 
 import com.aincorp.clotheswardrobe.entities.Shoes;
 import com.aincorp.clotheswardrobe.repositories.ShoesRepository;

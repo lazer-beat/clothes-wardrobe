@@ -1,6 +1,7 @@
 package com.aincorp.clotheswardrobe.entities;
 
 import com.aincorp.clotheswardrobe.entities.emunerations.ClothesSize;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -30,6 +31,7 @@ public class Clothes {
     @Enumerated(EnumType.STRING)
     private ClothesSize clothesSize;
 
+    @JsonBackReference
     @OneToOne(cascade = CascadeType.ALL)
     @JoinTable(name = "clothes_cltype",
             joinColumns = @JoinColumn(name = "cl_id"),

@@ -1,7 +1,7 @@
 package com.aincorp.clotheswardrobe.controllers;
 
 import com.aincorp.clotheswardrobe.entities.Clothes;
-import com.aincorp.clotheswardrobe.service.ClothesService;
+import com.aincorp.clotheswardrobe.services.ClothesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

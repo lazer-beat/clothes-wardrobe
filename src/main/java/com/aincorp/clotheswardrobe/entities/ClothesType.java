@@ -1,5 +1,7 @@
 package com.aincorp.clotheswardrobe.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -21,6 +23,7 @@ public class ClothesType {
     @Column(name = "deleted")
     private Boolean deleted;
 
+    @JsonManagedReference
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "clothes_id")
     private Clothes clothes;

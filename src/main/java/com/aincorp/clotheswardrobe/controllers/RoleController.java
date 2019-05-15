@@ -1,7 +1,7 @@
 package com.aincorp.clotheswardrobe.controllers;
 
 import com.aincorp.clotheswardrobe.entities.Role;
-import com.aincorp.clotheswardrobe.service.RoleService;
+import com.aincorp.clotheswardrobe.services.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
