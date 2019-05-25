@@ -3,6 +3,7 @@ package com.aincorp.clotheswardrobe.entities;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
@@ -11,21 +12,27 @@ public class User {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private String id;
 
     @NotBlank(message = "Введите ваш логин")
     @Size(min = 2, max = 32, message = "Введен не корректный логин, введите больше двух символов")
-    @Column(name = "username")
-    private String username;
+    @Column(name = "name")
+    private String name;
 
-    @NotBlank(message = "Введите ваш пароль")
-    @Size(min = 8, max = 32, message = "Введен не корректный логин, введите больше восьми символов")
-    @Column(name = "password")
-    private String password;
+    @Column(name = "userpic")
+    private String userpic;
 
-    @Transient
-    private String confirmPassword;
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "gender")
+    private String gender;
+
+    @Column(name = "locale")
+    private String locale;
+
+    @Column(name = "lastVisit")
+    private LocalDateTime lastVisit;
 
     @OneToOne
     @JoinTable(name = "user_person",
@@ -46,43 +53,25 @@ public class User {
     public User() {
     }
 
-    public User(@NotBlank(message = "Введите ваш логин") @Size(min = 2, max = 32, message = "Введен не корректный логин, введите больше двух символов") String username, @NotBlank(message = "Введите ваш пароль") @Size(min = 8, max = 32, message = "Введен не корректный логин, введите больше восьми символов") String password, String confirmPassword, Person person) {
-        this.username = username;
-        this.password = password;
-        this.confirmPassword = confirmPassword;
+    public User(@NotBlank(message = "Введите ваш логин") @Size(min = 2, max = 32, message = "Введен не корректный логин, введите больше двух символов") String name, Person person) {
+        this.name = name;
         this.person = person;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getName() {
+        return name;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getConfirmPassword() {
-        return confirmPassword;
-    }
-
-    public void setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Person getPerson() {
@@ -107,5 +96,45 @@ public class User {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public String getUserpic() {
+        return userpic;
+    }
+
+    public void setUserpic(String userpic) {
+        this.userpic = userpic;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getLocale() {
+        return locale;
+    }
+
+    public void setLocale(String locale) {
+        this.locale = locale;
+    }
+
+    public LocalDateTime getLastVisit() {
+        return lastVisit;
+    }
+
+    public void setLastVisit(LocalDateTime lastVisit) {
+        this.lastVisit = lastVisit;
     }
 }

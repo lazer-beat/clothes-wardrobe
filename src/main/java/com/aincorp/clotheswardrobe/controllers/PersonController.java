@@ -2,8 +2,6 @@ package com.aincorp.clotheswardrobe.controllers;
 
 import com.aincorp.clotheswardrobe.entities.Person;
 import com.aincorp.clotheswardrobe.services.PersonService;
-import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
-import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -60,7 +58,7 @@ public class PersonController {
             for (FieldError error : bindingResult.getFieldErrors()) {
                 errors.put(error.getField(), error.getDefaultMessage());
             }
-            return  new ResponseEntity<>(errors, HttpStatus.NOT_ACCEPTABLE);
+            return new ResponseEntity<>(errors, HttpStatus.NOT_ACCEPTABLE);
         }
 
         if (person.getId() != null) {

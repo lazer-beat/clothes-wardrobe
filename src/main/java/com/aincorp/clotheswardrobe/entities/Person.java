@@ -1,5 +1,7 @@
 package com.aincorp.clotheswardrobe.entities;
 
+import com.aincorp.clotheswardrobe.entities.emunerations.Gender;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -39,6 +41,9 @@ public class Person {
     @Email(message = "Введите корректный емейл адрес")
     @Column(name = "email")
     private String email;
+
+    @Enumerated(EnumType.ORDINAL)
+    private Gender gender;
 
     public Person() {
     }
@@ -97,5 +102,13 @@ public class Person {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
     }
 }

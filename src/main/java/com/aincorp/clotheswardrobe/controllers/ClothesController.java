@@ -1,6 +1,7 @@
 package com.aincorp.clotheswardrobe.controllers;
 
 import com.aincorp.clotheswardrobe.entities.Clothes;
+import com.aincorp.clotheswardrobe.repositories.ClothesRepository;
 import com.aincorp.clotheswardrobe.services.ClothesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,6 +22,9 @@ public class ClothesController {
 
     @Autowired
     private ClothesService clothesService;
+
+    @Autowired
+    private ClothesRepository clothesRepository;
 
     Map<String, String> errors;
 
@@ -52,6 +56,24 @@ public class ClothesController {
         }
 
         return new ResponseEntity<>(clothesService.save(clothes), HttpStatus.OK);
+    }
+
+    @DeleteMapping(path = "/deleteClothes/{id}")
+    public ResponseEntity<Void> deleteClothes(@PathVariable("id") Long id) {
+        clothesService.deleteClothes(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping(path = "/updateClothes/{id}")
+    Clothes updateClothes(@RequestBody Clothes newClothes, @PathVariable Long id) {
+
+        return clothesRepository.findById(id).map(clothes -> {
+            clothes.setName(newClothes.getName());
+            return clothesRepository.save(clothes);
+        }).orElseGet(() -> {
+            newClothes.setId(id);
+            return clothesRepository.save(newClothes);
+        });
     }
 
 }
